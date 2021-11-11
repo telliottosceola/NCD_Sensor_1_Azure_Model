@@ -1,1 +1,212 @@
-[{"id":"053d94f499fdf9d2","type":"tab","label":"Azure","disabled":false,"info":""},{"id":"03a3396fa5ddee44","type":"ncd-wireless-node","z":"053d94f499fdf9d2","d":true,"name":"","connection":"1fa2e326df3f6f3c","config_comm":"1fa2e326df3f6f3c","addr":"00:13:a2:00:41:8c:31:66","sensor_type":"1","auto_config":"","node_id_delay_active":"","node_id":0,"delay":300,"destination":"0000FFFF","power_active":"","power":4,"retries_active":"","retries":10,"pan_id_active":"","pan_id":"7FFF","change_enabled":"","change_pr":"0","change_interval":"0","cm_calibration":"60.6","bp_altitude":"0","bp_pressure":"0","bp_temp_prec":"0","bp_press_prec":"0","amgt_accel":"0","amgt_mag":"0","amgt_gyro":"0","impact_accel":"0","impact_data_rate":"4","impact_threshold":25,"impact_duration":1,"activ_interr_x":1,"activ_interr_y":2,"activ_interr_z":4,"activ_interr_op":8,"force_calibration_co2_auto_config":"","force_calibration_co2":400,"filtering":0,"data_rate":5,"time_series":0,"reading_type":1,"mode_80_active":"","mode_80":0,"filter_80_active":"","filter_80":0,"output_data_rate_101_active":"","output_data_rate_101":0,"sampling_duration_101_active":"","sampling_duration_101":1,"sampling_interval_101_active":"","sampling_interval_101":1,"full_scale_range_101_active":"","full_scale_range_101":1,"x_axis_101":"","y_axis_101":"","z_axis_101":"","x":250,"y":260,"wires":[["04fa398d9a55b6db","9a1e0995898805e8"]]},{"id":"04fa398d9a55b6db","type":"function","z":"053d94f499fdf9d2","name":"Telemetry","func":"var newMSG = {};\nnewMSG.payload = {};\nnewMSG.topic = \"telemetry\";\n\nnewMSG.payload.battery_percent = msg.data.battery_percent;\nnewMSG.payload.counter = msg.data.counter;\nnewMSG.payload.rssi = msg.data.rssi;\nfor(var key in msg.data.sensor_data){\n    newMSG.payload[key] = msg.data.sensor_data[key];\n}\nreturn newMSG;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":460,"y":220,"wires":[["5bbeebe4d807ce00"]]},{"id":"5bbeebe4d807ce00","type":"azureiotdevice","z":"053d94f499fdf9d2","d":true,"deviceid":"sensor-1","pnpModelid":"dtmi:ncdSensorTest:NCDTemperatureHumidity4r5;1","connectiontype":"dps","authenticationmethod":"sas","iothub":"","isIotcentral":true,"scopeid":"0ne0042558B","enrollmenttype":"device","saskey":"gzluTYxnaVLBeK/bm7yciSv3yX09JHE9gdO3IrOmSJM=","certname":"","keyname":"","protocol":"mqtt","retryInterval":30,"methods":[],"DPSpayload":"","gatewayHostname":"","caname":"","cert":"","key":"","ca":"","x":670,"y":260,"wires":[["64553b3a4bea234b"]]},{"id":"64553b3a4bea234b","type":"debug","z":"053d94f499fdf9d2","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"true","targetType":"full","statusVal":"","statusType":"auto","x":890,"y":260,"wires":[]},{"id":"9a1e0995898805e8","type":"function","z":"053d94f499fdf9d2","name":"Properties","func":"var devices;\nif (flow.get(\"devices\")!==undefined){\n    devices = flow.get(\"devices\");\n}else{\n    devices = [];\n}\n\nif(devices.includes(msg.data.addr)){\n    return null;\n}\n\nvar newMSG = {};\nnewMSG.payload = {};\nnewMSG.topic = \"property\";\n\nnewMSG.payload.nodeId = msg.data.nodeId;\nnewMSG.payload.firmware = msg.data.firmware;\nnewMSG.payload.sensor_type = msg.data.sensor_type;\nnewMSG.payload.addr = msg.data.addr;\nnewMSG.payload.modem_mac = msg.data.modem_mac;\n\ndevices.push(msg.data.addr);\nflow.set(\"devices\",devices);\nreturn newMSG;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":450,"y":300,"wires":[["5bbeebe4d807ce00"]]},{"id":"251f5a0e80aa3a87","type":"ncd-gateway-node","z":"053d94f499fdf9d2","d":true,"name":"","connection":"1fa2e326df3f6f3c","unknown_devices":0,"outputs":1,"x":260,"y":140,"wires":[["cb955c6721b7fcfc"]]},{"id":"cb955c6721b7fcfc","type":"debug","z":"053d94f499fdf9d2","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"false","statusVal":"","statusType":"auto","x":490,"y":140,"wires":[]},{"id":"1fa2e326df3f6f3c","type":"ncd-gateway-config","name":"","comm_type":"serial","ip_address":"","tcp_port":"2101","port":"/dev/tty.usbserial-AC3VPU0N","baudRate":"115200","pan_id":"7fff","rssi":false}]
+[
+    {
+        "id": "053d94f499fdf9d2",
+        "type": "tab",
+        "label": "Azure",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "03a3396fa5ddee44",
+        "type": "ncd-wireless-node",
+        "z": "053d94f499fdf9d2",
+        "d": true,
+        "name": "",
+        "connection": "1fa2e326df3f6f3c",
+        "config_comm": "1fa2e326df3f6f3c",
+        "addr": "00:13:a2:00:41:8c:31:66",
+        "sensor_type": "1",
+        "auto_config": "",
+        "node_id_delay_active": "",
+        "node_id": 0,
+        "delay": 300,
+        "destination": "0000FFFF",
+        "power_active": "",
+        "power": 4,
+        "retries_active": "",
+        "retries": 10,
+        "pan_id_active": "",
+        "pan_id": "7FFF",
+        "change_enabled": "",
+        "change_pr": "0",
+        "change_interval": "0",
+        "cm_calibration": "60.6",
+        "bp_altitude": "0",
+        "bp_pressure": "0",
+        "bp_temp_prec": "0",
+        "bp_press_prec": "0",
+        "amgt_accel": "0",
+        "amgt_mag": "0",
+        "amgt_gyro": "0",
+        "impact_accel": "0",
+        "impact_data_rate": "4",
+        "impact_threshold": 25,
+        "impact_duration": 1,
+        "activ_interr_x": 1,
+        "activ_interr_y": 2,
+        "activ_interr_z": 4,
+        "activ_interr_op": 8,
+        "force_calibration_co2_auto_config": "",
+        "force_calibration_co2": 400,
+        "filtering": 0,
+        "data_rate": 5,
+        "time_series": 0,
+        "reading_type": 1,
+        "mode_80_active": "",
+        "mode_80": 0,
+        "filter_80_active": "",
+        "filter_80": 0,
+        "output_data_rate_101_active": "",
+        "output_data_rate_101": 0,
+        "sampling_duration_101_active": "",
+        "sampling_duration_101": 1,
+        "sampling_interval_101_active": "",
+        "sampling_interval_101": 1,
+        "full_scale_range_101_active": "",
+        "full_scale_range_101": 1,
+        "x_axis_101": "",
+        "y_axis_101": "",
+        "z_axis_101": "",
+        "x": 250,
+        "y": 260,
+        "wires": [
+            [
+                "04fa398d9a55b6db",
+                "9a1e0995898805e8"
+            ]
+        ]
+    },
+    {
+        "id": "04fa398d9a55b6db",
+        "type": "function",
+        "z": "053d94f499fdf9d2",
+        "name": "Telemetry",
+        "func": "var newMSG = {};\nnewMSG.payload = {};\nnewMSG.topic = \"telemetry\";\n\nnewMSG.payload.battery_percent = msg.data.battery_percent;\nnewMSG.payload.counter = msg.data.counter;\nnewMSG.payload.rssi = msg.data.rssi;\nfor(var key in msg.data.sensor_data){\n    newMSG.payload[key] = msg.data.sensor_data[key];\n}\nreturn newMSG;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 220,
+        "wires": [
+            [
+                "5bbeebe4d807ce00"
+            ]
+        ]
+    },
+    {
+        "id": "5bbeebe4d807ce00",
+        "type": "azureiotdevice",
+        "z": "053d94f499fdf9d2",
+        "d": true,
+        "deviceid": "sensor-1",
+        "pnpModelid": "dtmi:ncdSensorTest:NCDTemperatureHumidity4r5;1",
+        "connectiontype": "dps",
+        "authenticationmethod": "sas",
+        "iothub": "",
+        "isIotcentral": true,
+        "scopeid": "0ne0042558B",
+        "enrollmenttype": "device",
+        "saskey": "gzluTYxnaVLBeK/bm7yciSv3yX09JHE9gdO3IrOmSJM=",
+        "certname": "",
+        "keyname": "",
+        "protocol": "mqtt",
+        "retryInterval": 30,
+        "methods": [],
+        "DPSpayload": "",
+        "gatewayHostname": "",
+        "caname": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "x": 670,
+        "y": 260,
+        "wires": [
+            [
+                "64553b3a4bea234b"
+            ]
+        ]
+    },
+    {
+        "id": "64553b3a4bea234b",
+        "type": "debug",
+        "z": "053d94f499fdf9d2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "9a1e0995898805e8",
+        "type": "function",
+        "z": "053d94f499fdf9d2",
+        "name": "Properties",
+        "func": "var devices;\nif (flow.get(\"devices\")!==undefined){\n    devices = flow.get(\"devices\");\n}else{\n    devices = [];\n}\n\nif(devices.includes(msg.data.addr)){\n    return null;\n}\n\nvar newMSG = {};\nnewMSG.payload = {};\nnewMSG.topic = \"property\";\n\nnewMSG.payload.nodeId = msg.data.nodeId;\nnewMSG.payload.firmware = msg.data.firmware;\nnewMSG.payload.sensor_type = msg.data.sensor_type;\nnewMSG.payload.addr = msg.data.addr;\nnewMSG.payload.modem_mac = msg.data.modem_mac;\n\ndevices.push(msg.data.addr);\nflow.set(\"devices\",devices);\nreturn newMSG;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 300,
+        "wires": [
+            [
+                "5bbeebe4d807ce00"
+            ]
+        ]
+    },
+    {
+        "id": "251f5a0e80aa3a87",
+        "type": "ncd-gateway-node",
+        "z": "053d94f499fdf9d2",
+        "d": true,
+        "name": "",
+        "connection": "1fa2e326df3f6f3c",
+        "unknown_devices": 0,
+        "outputs": 1,
+        "x": 260,
+        "y": 140,
+        "wires": [
+            [
+                "cb955c6721b7fcfc"
+            ]
+        ]
+    },
+    {
+        "id": "cb955c6721b7fcfc",
+        "type": "debug",
+        "z": "053d94f499fdf9d2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "1fa2e326df3f6f3c",
+        "type": "ncd-gateway-config",
+        "name": "",
+        "comm_type": "serial",
+        "ip_address": "",
+        "tcp_port": "2101",
+        "port": "/dev/tty.usbserial-AC3VPU0N",
+        "baudRate": "115200",
+        "pan_id": "7fff",
+        "rssi": false
+    }
+]
