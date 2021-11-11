@@ -1,0 +1,117 @@
+[
+  {
+    "@id": "dtmi:ncdSensorTest:NCDTemperatureHumidity4r5;1",
+    "@type": "Interface",
+    "contents": [
+      {
+        "@id": "dtmi:ncdSensorTest:NCDTemperatureHumidity4r5:temperature;1",
+        "@type": [
+          "Telemetry",
+          "Temperature"
+        ],
+        "displayName": {
+          "en": "Temperature"
+        },
+        "name": "temperature",
+        "schema": "double",
+        "unit": "degreeCelsius"
+      },
+      {
+        "@id": "dtmi:ncdSensorTest:NCDTemperatureHumidity4r5:humidity;1",
+        "@type": [
+          "Telemetry",
+          "RelativeHumidity"
+        ],
+        "displayName": {
+          "en": "Humidity"
+        },
+        "name": "humidity",
+        "schema": "double",
+        "unit": "percent"
+      },
+      {
+        "@id": "dtmi:ncdSensorTest:NCDTemperatureHumidity4r5:battery_percent;1",
+        "@type": "Telemetry",
+        "displayName": {
+          "en": "Battery Life"
+        },
+        "name": "battery_percent",
+        "schema": "double"
+      },
+      {
+        "@id": "dtmi:ncdSensorTest:NCDTemperatureHumidity4r5:counter;1",
+        "@type": "Telemetry",
+        "displayName": {
+          "en": "Transmission Count"
+        },
+        "name": "counter",
+        "schema": "integer"
+      },
+      {
+        "@id": "dtmi:ncdSensorTest:NCDTemperatureHumidity4r5:rssi;1",
+        "@type": "Telemetry",
+        "displayName": {
+          "en": "RSSI"
+        },
+        "name": "rssi",
+        "schema": "double"
+      },
+      {
+        "@id": "dtmi:ncdSensorTest:NCDTemperatureHumidity4r5:addr;1",
+        "@type": "Property",
+        "displayName": {
+          "en": "Wireless Serial Number"
+        },
+        "name": "addr",
+        "schema": "string",
+        "writable": false
+      },
+      {
+        "@id": "dtmi:ncdSensorTest:NCDTemperatureHumidity4r5:nodeId;1",
+        "@type": "Property",
+        "displayName": {
+          "en": "Node ID"
+        },
+        "name": "nodeId",
+        "schema": "double",
+        "writable": false
+      },
+      {
+        "@id": "dtmi:ncdSensorTest:NCDTemperatureHumidity4r5:firmware;1",
+        "@type": "Property",
+        "displayName": {
+          "en": "Firmware Version"
+        },
+        "name": "firmware",
+        "schema": "integer",
+        "writable": false
+      },
+      {
+        "@id": "dtmi:ncdSensorTest:NCDTemperatureHumidity4r5:sensor_type;1",
+        "@type": "Property",
+        "displayName": {
+          "en": "NCD Sensor Type"
+        },
+        "name": "sensor_type",
+        "schema": "integer",
+        "writable": false
+      },
+      {
+        "@id": "dtmi:ncdSensorTest:NCDTemperatureHumidity4r5:modem_mac;1",
+        "@type": "Property",
+        "displayName": {
+          "en": "Gateway Serial Number"
+        },
+        "name": "modem_mac",
+        "schema": "string"
+      }
+    ],
+    "displayName": {
+      "en": "NCD-Temperature-Humidity"
+    },
+    "@context": [
+      "dtmi:iotcentral:context;2",
+      "dtmi:dtdl:context;2"
+    ]
+  }
+]
