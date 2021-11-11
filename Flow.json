@@ -1,15 +1,15 @@
 [
     {
-        "id": "053d94f499fdf9d2",
+        "id": "2bc7a9d027b5d9d8",
         "type": "tab",
         "label": "Azure",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "03a3396fa5ddee44",
+        "id": "9ddd1dbd085b8a7e",
         "type": "ncd-wireless-node",
-        "z": "053d94f499fdf9d2",
+        "z": "2bc7a9d027b5d9d8",
         "d": true,
         "name": "",
         "connection": "1fa2e326df3f6f3c",
@@ -71,15 +71,15 @@
         "y": 260,
         "wires": [
             [
-                "04fa398d9a55b6db",
-                "9a1e0995898805e8"
+                "e721db86cacd5c50",
+                "41c4b7f8f6e1b775"
             ]
         ]
     },
     {
-        "id": "04fa398d9a55b6db",
+        "id": "e721db86cacd5c50",
         "type": "function",
-        "z": "053d94f499fdf9d2",
+        "z": "2bc7a9d027b5d9d8",
         "name": "Telemetry",
         "func": "var newMSG = {};\nnewMSG.payload = {};\nnewMSG.topic = \"telemetry\";\n\nnewMSG.payload.battery_percent = msg.data.battery_percent;\nnewMSG.payload.counter = msg.data.counter;\nnewMSG.payload.rssi = msg.data.rssi;\nfor(var key in msg.data.sensor_data){\n    newMSG.payload[key] = msg.data.sensor_data[key];\n}\nreturn newMSG;",
         "outputs": 1,
@@ -91,24 +91,24 @@
         "y": 220,
         "wires": [
             [
-                "5bbeebe4d807ce00"
+                "7690cf9a243b5512"
             ]
         ]
     },
     {
-        "id": "5bbeebe4d807ce00",
+        "id": "7690cf9a243b5512",
         "type": "azureiotdevice",
-        "z": "053d94f499fdf9d2",
+        "z": "2bc7a9d027b5d9d8",
         "d": true,
-        "deviceid": "sensor-1",
-        "pnpModelid": "dtmi:ncdSensorTest:NCDTemperatureHumidity4r5;1",
+        "deviceid": "",
+        "pnpModelid": "",
         "connectiontype": "dps",
         "authenticationmethod": "sas",
         "iothub": "",
         "isIotcentral": true,
-        "scopeid": "0ne0042558B",
+        "scopeid": "",
         "enrollmenttype": "device",
-        "saskey": "gzluTYxnaVLBeK/bm7yciSv3yX09JHE9gdO3IrOmSJM=",
+        "saskey": "",
         "certname": "",
         "keyname": "",
         "protocol": "mqtt",
@@ -120,18 +120,18 @@
         "cert": "",
         "key": "",
         "ca": "",
-        "x": 670,
+        "x": 640,
         "y": 260,
         "wires": [
             [
-                "64553b3a4bea234b"
+                "b4b8f641ff7b71fe"
             ]
         ]
     },
     {
-        "id": "64553b3a4bea234b",
+        "id": "b4b8f641ff7b71fe",
         "type": "debug",
-        "z": "053d94f499fdf9d2",
+        "z": "2bc7a9d027b5d9d8",
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -146,9 +146,9 @@
         "wires": []
     },
     {
-        "id": "9a1e0995898805e8",
+        "id": "41c4b7f8f6e1b775",
         "type": "function",
-        "z": "053d94f499fdf9d2",
+        "z": "2bc7a9d027b5d9d8",
         "name": "Properties",
         "func": "var devices;\nif (flow.get(\"devices\")!==undefined){\n    devices = flow.get(\"devices\");\n}else{\n    devices = [];\n}\n\nif(devices.includes(msg.data.addr)){\n    return null;\n}\n\nvar newMSG = {};\nnewMSG.payload = {};\nnewMSG.topic = \"property\";\n\nnewMSG.payload.nodeId = msg.data.nodeId;\nnewMSG.payload.firmware = msg.data.firmware;\nnewMSG.payload.sensor_type = msg.data.sensor_type;\nnewMSG.payload.addr = msg.data.addr;\nnewMSG.payload.modem_mac = msg.data.modem_mac;\n\ndevices.push(msg.data.addr);\nflow.set(\"devices\",devices);\nreturn newMSG;",
         "outputs": 1,
@@ -160,14 +160,14 @@
         "y": 300,
         "wires": [
             [
-                "5bbeebe4d807ce00"
+                "7690cf9a243b5512"
             ]
         ]
     },
     {
-        "id": "251f5a0e80aa3a87",
+        "id": "387cb3838ca3f330",
         "type": "ncd-gateway-node",
-        "z": "053d94f499fdf9d2",
+        "z": "2bc7a9d027b5d9d8",
         "d": true,
         "name": "",
         "connection": "1fa2e326df3f6f3c",
@@ -177,14 +177,14 @@
         "y": 140,
         "wires": [
             [
-                "cb955c6721b7fcfc"
+                "20a12fc35d340a10"
             ]
         ]
     },
     {
-        "id": "cb955c6721b7fcfc",
+        "id": "20a12fc35d340a10",
         "type": "debug",
-        "z": "053d94f499fdf9d2",
+        "z": "2bc7a9d027b5d9d8",
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -207,6 +207,6 @@
         "port": "/dev/tty.usbserial-AC3VPU0N",
         "baudRate": "115200",
         "pan_id": "7fff",
-        "rssi": false
+        "rssi": true
     }
 ]
